@@ -1,4 +1,8 @@
 ---
+import '../styles/global.css';
+
+const name = 'Aliaksandr Zhukau';
+const description = 'Personal website of Aliaksandr Zhukau. Coming soon.';
 ---
 
 <html lang="en">
@@ -6,11 +10,23 @@
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light dark" />
+    <title>{name}</title>
   </head>
-  <body>
-    <h1>Astro</h1>
+  <body class="grid min-h-dvh place-items-center bg-stone-50 px-6 text-stone-900 antialiased dark:bg-stone-950 dark:text-stone-100">
+    <main class="flex flex-col items-center gap-4 text-center">
+      <h1 class="text-3xl font-medium tracking-tight sm:text-4xl">{name}</h1>
+      <p class="flex items-center gap-2 font-mono text-sm text-stone-500 dark:text-stone-400">
+        <span class="relative flex size-2" aria-hidden="true">
+          <span class="absolute inline-flex size-full animate-ping rounded-full bg-amber-500 opacity-75 motion-reduce:hidden"></span>
+          <span class="relative inline-flex size-2 rounded-full bg-amber-500"></span>
+        </span>
+        Work in progress
+      </p>
+    </main>
   </body>
 </html>
