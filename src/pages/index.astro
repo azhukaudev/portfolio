@@ -1,4 +1,6 @@
 ---
+import { Water } from '../components/water/Water';
+
 import '../styles/global.css';
 
 const name = 'Aliaksandr Zhukau';
@@ -17,16 +19,10 @@ const description = 'Personal website of Aliaksandr Zhukau. Coming soon.';
     <meta name="color-scheme" content="light dark" />
     <title>{name}</title>
   </head>
-  <body class="grid min-h-dvh place-items-center bg-stone-50 px-6 text-stone-900 antialiased dark:bg-stone-950 dark:text-stone-100">
+  <body class="grid min-h-dvh place-items-center bg-neutral-100 px-6 text-neutral-900 antialiased dark:bg-neutral-900 dark:text-neutral-100">
     <main class="flex flex-col items-center gap-4 text-center">
-      <h1 class="text-3xl font-medium tracking-tight sm:text-4xl">{name}</h1>
-      <p class="flex items-center gap-2 font-mono text-sm text-stone-500 dark:text-stone-400">
-        <span class="relative flex size-2" aria-hidden="true">
-          <span class="absolute inline-flex size-full animate-ping rounded-full bg-amber-500 opacity-75 motion-reduce:hidden"></span>
-          <span class="relative inline-flex size-2 rounded-full bg-amber-500"></span>
-        </span>
-        Work in progress
-      </p>
+      <h1 class="w-min text-[min(18vw,10rem)] leading-none font-bold tracking-tight">{name}</h1>
     </main>
+    <Water client:only="react" />
   </body>
 </html>

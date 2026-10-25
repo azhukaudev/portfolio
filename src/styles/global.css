@@ -1,1 +1,10 @@
 @import 'tailwindcss';
+
+html[data-water='on'] main {
+  opacity: 0;
+}
+
+/* The whole page is water you can touch, so show it as interactive. */
+html[data-water='on'] body {
+  cursor: pointer;
+}

@@ -1,8 +1,11 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
+import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
+import babel from '@rolldown/plugin-babel';
 import tailwindcss from '@tailwindcss/vite';
+import { reactCompilerPreset } from '@vitejs/plugin-react';
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,9 +13,10 @@ export default defineConfig({
   adapter: cloudflare({
     imageService: 'compile',
   }),
-  integrations: [sitemap()],
+  integrations: [react(), sitemap()],
   session: false,
   vite: {
-    plugins: [tailwindcss()],
+    // React Compiler memoizes components automatically: https://react.dev/learn/react-compiler
+    plugins: [tailwindcss(), babel({ presets: [reactCompilerPreset()] })],
   },
 });

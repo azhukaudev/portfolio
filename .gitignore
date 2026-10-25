@@ -26,3 +26,7 @@ pnpm-debug.log*
 # wrangler files
 .wrangler/
 .dev.vars*
+
+# ai agent artefacts
+/SPEC.md
+/tasks/
