@@ -1,0 +1,17 @@
+{
+  "printWidth": 120,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "plugins": ["@ianvs/prettier-plugin-sort-imports", "prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+  "importOrder": ["<BUILTIN_MODULES>", "", "^astro(:.*|/.*)?$", "<THIRD_PARTY_MODULES>", "", "^[.]"],
+  "importOrderTypeScriptVersion": "5.0.0",
+  "tailwindStylesheet": "./src/styles/global.css",
+  "overrides": [
+    {
+      "files": "*.astro",
+      "options": {
+        "parser": "astro"
+      }
+    }
+  ]
+}
