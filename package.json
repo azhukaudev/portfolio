@@ -21,13 +21,12 @@
     "@astrojs/cloudflare": "14.4.2",
     "@astrojs/react": "7.1.1",
     "@astrojs/sitemap": "3.7.4",
-    "@react-three/fiber": "9.8.2",
+    "@lucide/astro": "1.69.0",
     "@tailwindcss/vite": "4.3.3",
     "astro": "7.4.2",
     "react": "19.3.1",
     "react-dom": "19.3.1",
-    "tailwindcss": "4.3.3",
-    "three": "0.186.1"
+    "tailwindcss": "4.3.3"
   },
   "devDependencies": {
     "@babel/core": "8.0.9",
@@ -35,7 +34,6 @@
     "@rolldown/plugin-babel": "0.2.4",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
-    "@types/three": "0.186.0",
     "@vitejs/plugin-react": "6.1.2",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "10.13.0",

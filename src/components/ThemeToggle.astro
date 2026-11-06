@@ -1,0 +1,33 @@
+---
+import Lightbulb from '@lucide/astro/icons/lightbulb';
+import LightbulbOff from '@lucide/astro/icons/lightbulb-off';
+---
+
+<button
+  type="button"
+  data-theme-toggle
+  class="fixed top-4 right-4 grid size-11 cursor-pointer place-items-center rounded-full text-quiet transition-colors duration-300 ease-expo hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal sm:top-6 sm:right-6 dark:text-quiet-dark dark:hover:text-ink-dark dark:focus-visible:outline-signal-dark"
+>
+  <span class="sr-only dark:hidden">Switch to dark mode</span>
+  <span class="sr-only hidden dark:inline">Switch to light mode</span>
+  <Lightbulb class="size-6 dark:hidden" stroke-width={1.5} aria-hidden="true" />
+  <LightbulbOff class="hidden size-6 dark:block" stroke-width={1.5} aria-hidden="true" />
+</button>
+
+<script>
+  const root = document.documentElement;
+  const systemDark = matchMedia('(prefers-color-scheme: dark)');
+  const isDark = () => (root.dataset.theme ? root.dataset.theme === 'dark' : systemDark.matches);
+
+  for (const button of document.querySelectorAll('[data-theme-toggle]')) {
+    button.addEventListener('click', () => {
+      const theme = isDark() ? 'light' : 'dark';
+      root.dataset.theme = theme;
+      try {
+        localStorage.setItem('theme', theme);
+      } catch {
+        // Storage can be blocked; the switch still works for this visit.
+      }
+    });
+  }
+</script>

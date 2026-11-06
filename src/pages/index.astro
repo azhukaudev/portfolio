@@ -1,28 +1,55 @@
 ---
-import { Water } from '../components/water/Water';
-
-import '../styles/global.css';
+import TextLink from '../components/TextLink.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 const name = 'Aliaksandr Zhukau';
-const description = 'Personal website of Aliaksandr Zhukau. Coming soon.';
+const title = `${name} — Full-Stack Engineer`;
+const description = 'Aliaksandr Zhukau, a full-stack engineer working remotely.';
+const url = new URL(Astro.url.pathname, Astro.site);
+const image = new URL('/og.png', Astro.site);
+
+// Structured data so search engines can tie this site and the profiles below to one person.
+const profile = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  url,
+  mainEntity: {
+    '@type': 'Person',
+    name,
+    jobTitle: 'Full-Stack Engineer',
+    url: Astro.site,
+    email: 'mailto:dev@azhukau.com',
+    sameAs: ['https://github.com/azhukaudev', 'https://www.linkedin.com/in/azhukau'],
+  },
+};
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description} />
-    <meta name="color-scheme" content="light dark" />
-    <title>{name}</title>
-  </head>
-  <body class="grid min-h-dvh place-items-center bg-neutral-100 px-6 text-neutral-900 antialiased dark:bg-neutral-900 dark:text-neutral-100">
-    <main class="flex flex-col items-center gap-4 text-center">
-      <h1 class="w-min text-[min(18vw,10rem)] leading-none font-bold tracking-tight">{name}</h1>
-    </main>
-    <Water client:only="react" />
-  </body>
-</html>
+<BaseLayout title={title} description={description}>
+  <Fragment slot="head">
+    <link rel="canonical" href={url} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={name} />
+    <meta property="og:url" content={url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="I’m Aliaksandr Zhukau, a full-stack engineer working remotely. azhukau.com"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(profile)} />
+  </Fragment>
+
+  {/* Hand-set lines: a line break next to a link would put a space before its comma. */}
+  <!-- prettier-ignore -->
+  <h1 class="m-0 max-w-[19.5em] text-sentence font-normal text-pretty text-quiet dark:text-quiet-dark">
+    I’m <span class="text-ink dark:text-ink-dark">{name}</span>, a full-stack engineer working remotely.
+    My code lives on <TextLink href="https://github.com/azhukaudev" rel="me" delay={350}>GitHub</TextLink>,
+    my work history on <TextLink href="https://www.linkedin.com/in/azhukau" rel="me" delay={480}>LinkedIn</TextLink>,
+    and my inbox at <TextLink href="mailto:dev@azhukau.com" delay={610}>dev@azhukau.com</TextLink>.
+  </h1>
+</BaseLayout>

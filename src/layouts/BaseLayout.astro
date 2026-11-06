@@ -1,0 +1,47 @@
+---
+import { Font } from 'astro:assets';
+
+import ThemeToggle from '../components/ThemeToggle.astro';
+
+import '../styles/global.css';
+
+type Props = {
+  title: string;
+  description: string;
+  /** Keeps the page out of search results, e.g. for the 404 page. */
+  noindex?: boolean;
+};
+
+const { title, description, noindex = false } = Astro.props;
+---
+
+<html lang="en" class="scheme-light dark:scheme-dark">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="color-scheme" content="light dark" />
+    <Font cssVariable="--font-schibsted" preload />
+    <script is:inline>
+      // Apply a saved theme before first paint, so the page never flashes the wrong one.
+      try {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+      } catch {}
+    </script>
+    <slot name="head" />
+    <title>{title}</title>
+  </head>
+  <body class="grid min-h-dvh content-center bg-paper px-gutter pt-16 pb-[calc(4rem+11dvh)] text-ink antialiased selection:bg-signal/16 dark:bg-paper-dark dark:text-ink-dark dark:selection:bg-signal-dark/28">
+    <ThemeToggle />
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

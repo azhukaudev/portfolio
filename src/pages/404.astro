@@ -1,0 +1,13 @@
+---
+import TextLink from '../components/TextLink.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page not found — Aliaksandr Zhukau" description="This page doesn’t exist on azhukau.com." noindex>
+  {/* Hand-set lines: a line break next to a link would put a space before its period. */}
+  <!-- prettier-ignore -->
+  <h1 class="m-0 max-w-[19.5em] text-sentence font-normal text-pretty text-quiet dark:text-quiet-dark">
+    <span class="text-ink dark:text-ink-dark">This page doesn’t exist.</span>
+    Head back to <TextLink href="/" delay={350}>azhukau.com</TextLink>.
+  </h1>
+</BaseLayout>

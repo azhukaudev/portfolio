@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
@@ -15,6 +15,17 @@ export default defineConfig({
   }),
   integrations: [react(), sitemap()],
   session: false,
+  fonts: [
+    {
+      provider: fontProviders.google(),
+      name: 'Schibsted Grotesk',
+      cssVariable: '--font-schibsted',
+      weights: [400],
+      styles: ['normal'],
+      subsets: ['latin'],
+      fallbacks: ['sans-serif'],
+    },
+  ],
   vite: {
     // React Compiler memoizes components automatically: https://react.dev/learn/react-compiler
     plugins: [tailwindcss(), babel({ presets: [reactCompilerPreset()] })],

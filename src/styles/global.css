@@ -1,10 +1,47 @@
 @import 'tailwindcss';
 
-html[data-water='on'] main {
-  opacity: 0;
+/*
+ * Dark follows the system until the visitor picks a theme with the switch,
+ * which sets data-theme on <html>. Without JavaScript the system setting still applies.
+ */
+@custom-variant dark {
+  &:where([data-theme='dark'], [data-theme='dark'] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme='light']), :root:not([data-theme='light']) *) {
+      @slot;
+    }
+  }
 }
 
-/* The whole page is water you can touch, so show it as interactive. */
-html[data-water='on'] body {
-  cursor: pointer;
+@theme {
+  --color-paper: #ffffff;
+  --color-paper-dark: #0f0f10;
+  --color-ink: #141414;
+  --color-ink-dark: #f2f2f2;
+  --color-quiet: #7d7d7d;
+  --color-quiet-dark: #7e7e82;
+  --color-signal: #2b59ff;
+  --color-signal-dark: #7590ff;
+
+  --text-sentence: clamp(2rem, 1.1rem + 3.4vw, 3.75rem);
+  --text-sentence--line-height: 1.18;
+  --text-sentence--letter-spacing: -0.025em;
+
+  --spacing-gutter: clamp(1.5rem, 12vw - 1.25rem, 10rem);
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-underline-in: underline-in 900ms var(--ease-expo) backwards;
+
+  @keyframes underline-in {
+    from {
+      background-size: 0% 0.05em;
+    }
+  }
+}
+
+@theme inline {
+  --font-sans: var(--font-schibsted), sans-serif;
 }

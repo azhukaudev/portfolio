@@ -1,0 +1,26 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+// `style` is owned here: it carries the animation delay.
+type Props = Omit<HTMLAttributes<'a'>, 'style'> & {
+  /** Delay in ms before the underline draws in on load, to stagger links in reading order. */
+  delay?: number;
+};
+
+const { class: className, delay = 0, ...attrs } = Astro.props;
+---
+
+{/* A drawn underline instead of text-decoration, so it can grow on hover and draw in on load. */}
+<!-- prettier-ignore -->
+<a
+  {...attrs}
+  class:list={[
+    'rounded-[0.08em] text-ink dark:text-ink-dark',
+    'bg-linear-to-r from-signal to-signal bg-size-[100%_0.05em] bg-bottom-left bg-no-repeat dark:from-signal-dark dark:to-signal-dark',
+    'transition-[background-size] duration-450 ease-expo hover:bg-size-[100%_0.12em]',
+    'focus-visible:outline-[0.06em] focus-visible:outline-offset-[0.1em] focus-visible:outline-signal dark:focus-visible:outline-signal-dark',
+    'motion-safe:animate-underline-in',
+    className,
+  ]}
+  style={`animation-delay: ${delay}ms`}
+><slot /></a>
