@@ -35,6 +35,12 @@ const { title, description, noindex = false } = Astro.props;
         if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
       } catch {}
     </script>
+    <script
+      is:inline
+      type="module"
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "7d1b0cacb97844508308ce88eaf49fee"}'
+    ></script>
     <slot name="head" />
     <title>{title}</title>
   </head>
